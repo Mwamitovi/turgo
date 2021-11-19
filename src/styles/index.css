@@ -8,8 +8,7 @@ body {
 }
 
 .MuiAppBar-colorPrimary.tweaked {
-  color: #dd3541;
-  background-color: #fff;
+  color: #7fffd4;
 }
 
 .secondary > .MuiAppBar-positionFixed {
@@ -24,6 +23,14 @@ body {
 .tweaked .flex {
   display: flex;
   flex: 1 1 auto;
+}
+
+.MuiFormLabel-root.Mui-focused:not(.Mui-error) {
+  color: #006400 !important;
+}
+
+.MuiInput-underline.Mui-focused:after {
+  border-bottom: 2px solid #006400;
 }
 
 .tweaked > .MuiToolbar-root > .MuiIconButton-root:first-of-type {
@@ -95,7 +102,8 @@ body {
 
 .custom .MuiButton-containedPrimary,
 .custom .MuiAvatar-root {
-  background-color: #4b0082 !important;
+  background-color: #006400 !important;
+  color: #7fffd4 !important;
 }
 
 .list-page .MuiPaper-root {

@@ -1,31 +1,22 @@
 import * as React from 'react';
-import { Admin, fetchUtils, Resource, ListGuesser } from 'react-admin';
 import polyglotI18nProvider from 'ra-i18n-polyglot';
+import { Admin, fetchUtils, Resource, ListGuesser } from 'react-admin';
 
-import dataProviderFactory, { drfProvider } from './dataProvider'; // eslint-disable-line
-import authProvider from './authProvider';
-import { Login, Layout } from './layout';
-import customRoutes from './routes';
-import englishMessages from './i18n/en';
+// import { theme } from 'layout/themes';
+import customRoutes from 'routes';
+import englishMessages from 'i18n/en';
+import authProvider from 'authProvider';
+import { Login, Layout, Theme } from 'layout';
+import dataProviderFactory, { drfProvider } from 'dataProvider'; // eslint-disable-line
+import { BASE_URL, products, customers, categories } from 'modules';
 
-import {
-  BASE_URL,
-  products,
-  customers,
-  categories,
-} from './modules';
+import { AppContext } from 'context';
 
-import { AppContext } from './context';
-
-const i18nProvider = polyglotI18nProvider(locale => {
-  if (locale === 'fr') {
-    return import('./i18n/fr').then(messages => messages.default);
-  }
-
-  // Always fallback on english
-  return englishMessages;
+const i18nProvider = polyglotI18nProvider(() => { 
+  return englishMessages; // Always show english
 }, 'en');
 
+ /*@ts-ignore*/
 const App = () => {
   const [dataProvider, setDataProvider] = React.useState<null | any>(null);
 
@@ -75,6 +66,7 @@ const App = () => {
         i18nProvider={i18nProvider}
         loginPage={Login}
         layout={Layout}
+        theme={Theme}
         disableTelemetry
       >
         <Resource name="customers" {...customers} />

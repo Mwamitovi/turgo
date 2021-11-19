@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import clsx from 'clsx';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
@@ -13,12 +13,10 @@ import {
   CircularProgress,
   TextField,
 } from '@material-ui/core';
-import { createTheme, makeStyles } from '@material-ui/core/styles';
-import { ThemeProvider } from '@material-ui/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import LockIcon from '@material-ui/icons/Lock';
 import { Notification, useTranslate, useLogin, useNotify } from 'react-admin';
 
-import { lightTheme } from './themes';
 
 const useStyles = makeStyles(theme => ({
   main: {
@@ -27,8 +25,9 @@ const useStyles = makeStyles(theme => ({
     minHeight: '100vh',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    background: 'url(https://source.unsplash.com/xyuYk9oLA8I/1600x900)',
+    background: 'url(https://source.unsplash.com/xyuYk9oLA8I/1600x900), linear-gradient(315deg, #006400 0%, #233329 74%)',
     backgroundRepeat: 'no-repeat',
+    backgroundColor: '#006400',
     backgroundSize: 'cover',
   },
   card: {
@@ -39,9 +38,6 @@ const useStyles = makeStyles(theme => ({
     margin: '1em',
     display: 'flex',
     justifyContent: 'center',
-  },
-  icon: {
-    backgroundColor: theme.palette.secondary.main,
   },
   hint: {
     marginTop: '1em',
@@ -81,7 +77,7 @@ interface FormValues {
 
 const { Form } = withTypes<FormValues>();
 
-const Login = () => {
+const Login: React.FC = props => {
   const [loading, setLoading] = useState(false);
   const translate = useTranslate();
   const classes = useStyles();
@@ -136,7 +132,7 @@ const Login = () => {
           <div className={clsx(classes.main, 'custom')}>
             <Card className={classes.card}>
               <div className={classes.avatar}>
-                <Avatar className={classes.icon}>
+                <Avatar>
                   <LockIcon />
                 </Avatar>
               </div>
@@ -188,13 +184,6 @@ Login.propTypes = {
   previousRoute: PropTypes.string,
 };
 
-// We need to put the ThemeProvider decoration in another component
-// Because otherwise the useStyles() hook used in Login won't get
-// the right theme
-const LoginWithTheme = (props: any) => (
-  <ThemeProvider theme={createTheme(lightTheme)}>
-    <Login {...props} />
-  </ThemeProvider>
-);
+const LoginComponent = (props: any) => <Login {...props} />
 
-export default LoginWithTheme;
+export default LoginComponent;

@@ -1,4 +1,6 @@
-export const darkTheme = {
+import { createTheme } from '@material-ui/core';
+
+const darkTheme = { // eslint-disable-line
   palette: {
     primary: {
       main: '#90caf9',
@@ -47,15 +49,14 @@ export const darkTheme = {
   },
 };
 
-export const lightTheme = {
+const lightTheme = {
   palette: {
     primary: {
-      // main: '#4f3cc9',
-      main: '#4b0082',
+      main: '#006400',
     },
     secondary: {
       light: '#5f5fc4',
-      main: '#283593',
+      main: '#7fffd4',
       dark: '#001064',
       contrastText: '#fff',
     },
@@ -91,8 +92,11 @@ export const lightTheme = {
     MuiButton: {
       contained: {
         backgroundColor: '#fff',
-        color: '#4f3cc9',
+        color: '#006400',
         boxShadow: 'none',
+        primary: {
+          color: '#006400',
+        }
       },
     },
     MuiButtonBase: {
@@ -150,3 +154,5 @@ export const lightTheme = {
     },
   },
 };
+
+export default createTheme(lightTheme);
