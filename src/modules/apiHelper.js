@@ -3,7 +3,7 @@ import * as request from 'superagent';
 export const BASE_URL = `${
   process.env.NODE_ENV !== 'production'
     ? process.env.REACT_APP_API
-    : process.env.REACT_APP_HEROKU
+    : process.env.REACT_APP_AWS
 }`;
 
 export const apiCall = (data, header, type, url) =>
