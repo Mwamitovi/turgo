@@ -1,32 +1,33 @@
-import * as React from 'react';
+import React from 'react';
 import {
   BooleanField,
   Datagrid,
   DateField,
-  DateInput,
   List,
   ListProps,
-  NullableBooleanInput,
+  // DateInput,
+  // NullableBooleanInput,
   NumberField,
   SearchInput,
 } from 'react-admin';
 import { useMediaQuery, Theme } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
+import MobileGrid from './MobileGrid';
 import SegmentsField from './SegmentsField';
-import SegmentInput from './SegmentInput';
+// import SegmentInput from './SegmentInput';
 import CustomerLinkField from './CustomerLinkField';
 import ColoredNumberField from './ColoredNumberField';
-import MobileGrid from './MobileGrid';
-import CustomerListAside from './CustomerListAside';
-import { ReactElement } from 'react';
+// import CustomerListAside from './CustomerListAside';
 
-const visitorFilters = [
+const CustomerFilters = [
   <SearchInput source="q" alwaysOn />,
-  <DateInput source="last_seen_gte" />,
-  <NullableBooleanInput source="has_ordered" />,
-  <NullableBooleanInput source="has_newsletter" defaultValue />,
-  <SegmentInput />,
+  /** more filters
+    <DateInput source="last_seen_gte" />, 
+    <NullableBooleanInput source="has_ordered" />,
+    <NullableBooleanInput source="has_newsletter" defaultValue />,
+    <SegmentInput />,
+  */
 ];
 
 const useStyles = makeStyles(theme => ({
@@ -39,17 +40,18 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const CustomerList = (props: ListProps): ReactElement => {
+const CustomerList = (props: ListProps): React.ReactElement => {
   const classes = useStyles();
   const isXsmall = useMediaQuery<Theme>(theme => theme.breakpoints.down('xs'));
-  const isSmall = useMediaQuery<Theme>(theme => theme.breakpoints.down('sm'));
+  // const isSmall = useMediaQuery<Theme>(theme => theme.breakpoints.down('sm'));
+  
   return (
     <List
       {...props}
-      filters={isSmall ? visitorFilters : undefined}
-      sort={{ field: 'last_seen', order: 'DESC' }}
       perPage={25}
-      aside={<CustomerListAside />}
+      filters={CustomerFilters}
+      // aside={<CustomerListAside />} expose more fitler options
+      sort={{ field: 'last_seen', order: 'DESC' }}
     >
       {isXsmall ? (
         <MobileGrid />
