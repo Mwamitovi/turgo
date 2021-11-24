@@ -25,20 +25,21 @@ export interface Product extends Record {
 export interface Customer extends Record {
   first_name: string;
   last_name: string;
-  address: string;
-  stateAbbr: string;
-  city: string;
-  zipcode: string;
-  avatar: string;
-  birthday: string;
-  first_seen: string;
-  last_seen: string;
-  has_ordered: boolean;
-  latest_purchase: string;
-  has_newsletter: boolean;
+  address?: string;
+  accounts?: string[];
+  stateAbbr?: string;
+  city?: string;
+  zipcode?: string;
+  avatar?: string;
+  birthday?: string;
+  first_seen?: string;
+  last_seen?: string;
+  has_ordered?: boolean;
+  latest_purchase?: string;
+  has_newsletter?: boolean;
   groups: string[];
-  nb_commands: number;
-  total_spent: number;
+  nb_commands?: number;
+  total_spent?: number;
 }
 
 export type OrderStatus = 'ordered' | 'delivered' | 'cancelled';

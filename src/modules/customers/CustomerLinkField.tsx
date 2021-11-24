@@ -1,10 +1,10 @@
-import * as React from 'react';
+import React from 'react';
 import { Link, FieldProps } from 'react-admin';
 
 import FullNameField from './FullNameField';
-import { Customer } from '../../types';
+import { Customer } from 'types';
 
-const CustomerLinkField = (props: FieldProps<Customer>) =>
+const CustomerLinkField: React.FC<FieldProps<Customer>> = props =>
   props.record ? (
     <Link to={`/customers/${props.record.id}`}>
       <FullNameField {...props} />
