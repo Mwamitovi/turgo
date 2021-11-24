@@ -43,14 +43,7 @@ const drfProvider = (apiUrl, httpClient = fetchUtils.fetchJson) => {
         break;
 
       case GET_ONE: {
-        const urls = {
-          account: 'networks',
-        };
-        /* Targets these modules: agents, members, superagents and coordinators */
-        const resource_url = !!CheckUrl(urls) ? CheckUrl(urls) : resource;
-
-        url = `${apiUrl}/${resource_url}/${params.id}/`;
-
+        url = `${apiUrl}/${resource}/${params.id}/`;
         break;
       }
 
@@ -66,7 +59,7 @@ const drfProvider = (apiUrl, httpClient = fetchUtils.fetchJson) => {
         };
 
         const urls = {
-          account: 'networks',
+          'auth/customers': 'customers',
         };
         /* Targets the "reports" module for consistent naming. */
         const resource_url = !!CheckUrl(urls) ? CheckUrl(urls) : resource;
@@ -159,9 +152,6 @@ const drfProvider = (apiUrl, httpClient = fetchUtils.fetchJson) => {
    * @returns {Promise} the Promise for a data response
    */
   return (type, resource, params) => {
-    /* return url array or null */
-    const CheckUrl = args => mapURL(args, resource);
-
     /**
      * Split GET_MANY, UPDATE_MANY and DELETE_MANY requests into multiple promises,
      * since they're not supported by default.
@@ -169,17 +159,11 @@ const drfProvider = (apiUrl, httpClient = fetchUtils.fetchJson) => {
     switch (type) {
       case GET_MANY:
         return Promise.all(
-          params.ids.map(id => {
-            const urls = {
-              members: 'users',
-            };
-            /* Targets these modules: members - reference fields */
-            const resource_url = !!CheckUrl(urls) ? CheckUrl(urls) : resource;
-
-            return httpClient(`${apiUrl}/${resource_url}/${id}/`, {
+          params.ids.map(id =>
+            httpClient(`${apiUrl}/${resource}/${id}/`, {
               method: 'GET',
-            });
-          })
+            })
+          )
         ).then(responses => ({
           data: responses.map(response => response.json),
         }));
