@@ -1,14 +1,13 @@
-import * as React from 'react';
+import React from 'react';
 import polyglotI18nProvider from 'ra-i18n-polyglot';
-import { Admin, fetchUtils, Resource, ListGuesser } from 'react-admin';
+import { Admin, fetchUtils, Resource } from 'react-admin';
 
-// import { theme } from 'layout/themes';
 import customRoutes from 'routes';
 import englishMessages from 'i18n/en';
 import authProvider from 'authProvider';
+import { drfProvider } from 'dataProvider';
+import { BASE_URL, customers } from 'modules';
 import { Login, Layout, Theme } from 'layout';
-import dataProviderFactory, { drfProvider } from 'dataProvider'; // eslint-disable-line
-import { BASE_URL, products, customers, categories } from 'modules';
 
 import { AppContext } from 'context';
 
@@ -57,22 +56,16 @@ const App = () => {
     <AppContext.Provider value={{ ...contextProps }}>
       <Admin
         title=""
-        // dataProvider={dataProvider}
-        dataProvider={dataProviderFactory(
-          process.env.REACT_APP_DATA_PROVIDER || ''
-        )}
+        theme={Theme}
+        layout={Layout}
+        loginPage={Login}
+        dataProvider={dataProvider}
         customRoutes={customRoutes}
         authProvider={authProvider}
         i18nProvider={i18nProvider}
-        loginPage={Login}
-        layout={Layout}
-        theme={Theme}
         disableTelemetry
       >
         <Resource name="customers" {...customers} />
-        <Resource name="products" {...products} />
-        <Resource name="categories" {...categories} />
-        <Resource name="tags" list={ListGuesser} />
       </Admin>
     </AppContext.Provider>
   );
