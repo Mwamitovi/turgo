@@ -1,21 +1,13 @@
 import React from 'react';
 import clsx from 'clsx';
-import { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Field, withTypes } from 'react-final-form';
 import { useLocation } from 'react-router-dom';
+import { Field, withTypes } from 'react-final-form';
 
-import {
-  Avatar,
-  Button,
-  Card,
-  CardActions,
-  CircularProgress,
-  TextField,
-} from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
 import LockIcon from '@material-ui/icons/Lock';
+import { makeStyles } from '@material-ui/core/styles';
 import { Notification, useTranslate, useLogin, useNotify } from 'react-admin';
+import { Avatar, Button, Card, CardActions, CircularProgress, TextField } from '@material-ui/core';
 
 
 const useStyles = makeStyles(theme => ({
@@ -78,7 +70,7 @@ interface FormValues {
 const { Form } = withTypes<FormValues>();
 
 const Login: React.FC = props => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = React.useState(false);
   const translate = useTranslate();
   const classes = useStyles();
   const notify = useNotify();
@@ -166,8 +158,8 @@ const Login: React.FC = props => {
                   disabled={loading}
                   fullWidth
                 >
-                  {loading && <CircularProgress size={25} thickness={2} />}
-                  {translate('ra.auth.sign_in')}
+                  {loading && <CircularProgress size={25} thickness={2} color="inherit" />}
+                  {!loading && translate('ra.auth.sign_in')}
                 </Button>
               </CardActions>
             </Card>
