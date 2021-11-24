@@ -15,7 +15,7 @@ import {
 import AvatarField from './AvatarField';
 import ColoredNumberField from './ColoredNumberField';
 import SegmentsField from './SegmentsField';
-import { Customer } from '../../types';
+import { Customer } from 'types';
 
 const useStyles = makeStyles(theme => ({
   root: { margin: '1em' },
