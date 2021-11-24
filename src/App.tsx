@@ -9,7 +9,7 @@ import { drfProvider } from 'dataProvider';
 import { BASE_URL, customers } from 'modules';
 import { Login, Layout, Theme } from 'layout';
 
-import { AppContext } from 'context';
+import { AppContext, State } from 'context';
 
 const i18nProvider = polyglotI18nProvider(() => { 
   return englishMessages; // Always show english
@@ -18,13 +18,15 @@ const i18nProvider = polyglotI18nProvider(() => {
  /*@ts-ignore*/
 const App = () => {
   const [dataProvider, setDataProvider] = React.useState<null | any>(null);
+  // was meant to style layout bsed on list-display
+  const [state, setState] = React.useState<State>({ isList: false });
 
   const fetchDataProvider = async () => {
     const httpClient = (url: string, options: { headers: any }): any => {
       if (!options.headers) {
         options.headers = new Headers({ Accept: 'application/json' });
       }
-      const token = sessionStorage.getItem('token');
+      const token = sessionStorage.getItem('accessToken');
       options.headers.set('Authorization', `Bearer ${token}`);
       return fetchUtils.fetchJson(url, options);
     };
@@ -50,7 +52,10 @@ const App = () => {
     );
   }
 
-  const contextProps = {};
+  const contextProps = {
+    isList: state.isList,
+    setState: setState,
+  };
 
   return (
     <AppContext.Provider value={{ ...contextProps }}>

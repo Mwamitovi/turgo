@@ -1,11 +1,10 @@
 import React from 'react';
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
-import { createTheme } from '@material-ui/core/styles';
-import { ThemeProvider } from '@material-ui/styles';
-import { CssBaseline, Container, Drawer } from '@material-ui/core';
 import { CoreLayoutProps, Notification, Error } from 'react-admin';
+import { ThemeProvider } from '@material-ui/styles';
+import { createTheme } from '@material-ui/core/styles';
+import { CssBaseline, Container } from '@material-ui/core';
 
 import { AppContext } from '../context';
 import CustomAppBar from './AppBar';
@@ -14,7 +13,7 @@ class Layout extends React.Component<LayoutProps, LayoutState> {
   static contextType = AppContext;
 
   state: LayoutState = {
-    openCart: false,
+    isList: false,
     hasError: false,
     errorMessage: undefined,
     errorInfo: undefined,
@@ -33,10 +32,10 @@ class Layout extends React.Component<LayoutProps, LayoutState> {
     });
   }
 
-  componentDidMount() {
-    const app = this.context;
-    this.setState({ ...this.state, openCart: app.openCart });
-  }
+  // componentDidMount() {
+  //   const app = this.context;
+  //   this.setState({ ...this.state, isList: app.isList });
+  // }
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     this.setState({
@@ -48,7 +47,8 @@ class Layout extends React.Component<LayoutProps, LayoutState> {
 
   render() {
     const { theme, title, children } = this.props;
-    const { hasError, errorMessage, errorInfo, openCart } = this.state;
+    const { hasError, errorMessage, errorInfo } = this.state;
+
     return (
       // @ts-ignore
       <ThemeProvider theme={createTheme(theme)}>
@@ -66,17 +66,6 @@ class Layout extends React.Component<LayoutProps, LayoutState> {
               children
             )}
           </main>
-          <Drawer
-            variant="persistent"
-            open={openCart as boolean}
-            anchor="right"
-            // onClose={handleClose}
-            // classes={{
-            //   paper: classes.drawerPaper,
-            // }}
-          >
-            <div className={clsx('cart-dialog')}>cart</div>
-          </Drawer>
         </Container>
         <Notification />
       </ThemeProvider>
@@ -96,7 +85,7 @@ export interface LayoutProps
     RouteComponentProps {}
 
 export interface LayoutState {
-  openCart: boolean;
+  isList: boolean,
   hasError: boolean;
   errorMessage?: Error;
   errorInfo?: React.ErrorInfo;
