@@ -2,25 +2,11 @@ import React from 'react';
 import clsx from 'clsx';
 import { AppBar } from 'react-admin';
 import { Link, useRouteMatch } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
 import { Tabs, Tab, Toolbar, Box, Typography } from '@material-ui/core';
 
 import { ProfileMenu } from './ProfileMenu';
 
-const useStyles = makeStyles({
-  title: {
-    flex: 1,
-    textOverflow: 'ellipsis',
-    whiteSpace: 'nowrap',
-    overflow: 'hidden',
-  },
-  spacer: {
-    flex: 1,
-  },
-});
-
-const CustomAppBar: React.FC = (props: any) => {
-  const classes = useStyles(); // eslint-disable-line
+const CustomAppBar: React.FC<any> = props => {
   const match = useRouteMatch(['/commands', '/account', '/invoices', '/deals']);
   const currentPath = match?.path ?? '/';
 
@@ -40,12 +26,6 @@ const CustomAppBar: React.FC = (props: any) => {
         <Box>
           <Tabs value={currentPath} aria-label="Navigation Tabs">
             <Tab label={'Customers'} component={Link} to="/" value="/" />
-            {/* <Tab
-              label={'Customers'}
-              component={Link}
-              to="/account"
-              value="/account"
-            /> */}
           </Tabs>
         </Box>
       </Toolbar>

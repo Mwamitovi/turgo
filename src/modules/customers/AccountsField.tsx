@@ -40,7 +40,7 @@ const AccountsField: React.FC<FieldProps<Customer>> = props => {
 };
 
 AccountsField.defaultProps = {
-  label: 'Accounts',
+  label: 'Account(s)',
   textAlign: 'center',
 };
 

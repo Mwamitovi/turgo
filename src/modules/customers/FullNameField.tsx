@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { memo } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { FieldProps } from 'react-admin';
@@ -23,15 +22,18 @@ interface Props extends FieldProps<Customer> {
   size?: string;
 }
 
-const FullNameField = (props: Props) => {
-  const { record, size } = props;
+const FullNameField: React.FC<Props> = props => {
   const classes = useStyles();
-  return record ? (
+  const { record, size } = props;
+
+  if (!record) return null;
+
+  return (
     <div className={classes.root}>
       <AvatarField className={classes.avatar} record={record} size={size} />
       {record.first_name} {record.last_name}
     </div>
-  ) : null;
+  );
 };
 
 FullNameField.defaultProps = {
@@ -39,4 +41,4 @@ FullNameField.defaultProps = {
   label: 'resources.customers.fields.name',
 };
 
-export default memo<Props>(FullNameField);
+export default React.memo<Props>(FullNameField);
