@@ -1,10 +1,6 @@
 import React from 'react';
-import {
-  List,
-  Datagrid,
-  ListProps,
-  SearchInput,
-} from 'react-admin';
+import { List, Datagrid, ListProps, SearchInput } from 'react-admin';
+
 import AccountsField from './AccountsField';
 import CustomerLinkField from './CustomerLinkField';
 
@@ -18,9 +14,9 @@ const CustomerList: React.FC<ListProps> = props => {
       {...props}
       perPage={25}
       filters={CustomerFilters}
-      sort={{ field: 'last_seen', order: 'DESC' }}
+      // sort={{ field: 'last_seen', order: 'DESC' }}
     >
-      <Datagrid optimized rowClick="edit">
+      <Datagrid optimized rowClick="show"> {/* redirects to "show" */}
         <CustomerLinkField />
         <AccountsField />
       </Datagrid>
