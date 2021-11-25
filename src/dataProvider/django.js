@@ -43,7 +43,13 @@ const drfProvider = (apiUrl, httpClient = fetchUtils.fetchJson) => {
         break;
 
       case GET_ONE: {
-        url = `${apiUrl}/${resource}/${params.id}/`;
+        const urls = {
+          'customers': 'finance/customer-summary',
+        };
+        /* Targets the "reports" module for consistent naming. */
+        const resource_url = !!CheckUrl(urls) ? CheckUrl(urls) : resource;
+
+        url = `${apiUrl}/${resource_url}/${params.id}`;
         break;
       }
 
