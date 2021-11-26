@@ -133,8 +133,6 @@ const drfProvider = (apiUrl, httpClient = fetchUtils.fetchJson) => {
         } else if ('detail' in json && json.detail === 'Invalid page.') {
           return { data: [], total: 0 };
         } else {
-          console.log(response);
-          console.log(json.length);
           throw new Error(
             'The total number of results is unknown. The DRF data provider ' +
               'expects responses for lists of resources to contain this ' +

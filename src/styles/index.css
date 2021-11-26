@@ -9,13 +9,18 @@ body {
   color: #7fffd4 !important;
 }
 
-.MuiContainer-root .list-page .MuiPaper-root:first-of-type {
+.MuiContainer-root .list-page .MuiPaper-root:first-of-type,
+.show-page .MuiPaper-root {
   box-shadow: 0px 8px 15px -9px rgb(0 0 0 / 20%), 0px 24px 30px 15px rgb(0 0 0 / 2%), 0px 9px 46px 8px rgb(0 0 0 / 1%);
 }
 
 .list-page {
   margin: 0 300px;
-  padding-bottom: 25px;
+}
+
+.list-page,
+.show-page {
+  padding-bottom: 45px;
 }
 
 .MuiTableCell-head.MuiTableCell-root {
